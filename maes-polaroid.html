@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Dia das Mães, Mãe! 🌸</title>
+  <meta name="description" content="Uma homenagem especial para a melhor mãe do mundo." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+  <style>
+/* ============================================================
+   VARIÁVEIS GLOBAIS
+   ============================================================ */
+:root {
+  --bg:           #f5ede0;
+  --bg-warm:      #efe3d1;
+  --bg-paper:     #fdf7ef;
+  --cream:        #fff9f0;
+  --wine:         #7a1f2e;
+  --rose:         #c4707a;
+  --rose-light:   #e8a8b0;
+  --gold:         #c8923a;
+  --gold-light:   #e8c08a;
+  --ink:          #3a2010;
+  --ink-mid:      #6b4030;
+  --ink-soft:     #9a6858;
+  --tape:         rgba(230, 210, 170, 0.7);
+  --shadow:       rgba(80, 30, 10, 0.18);
+
+  --font-hand:    'Sacramento', cursive;
+  --font-serif:   'DM Serif Display', Georgia, serif;
+  --font-body:    'Libre Baskerville', Georgia, serif;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(160,100,60,0.03) 28px, rgba(160,100,60,0.03) 29px),
+    repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(160,100,60,0.02) 28px, rgba(160,100,60,0.02) 29px);
+  color: var(--ink);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='4' fill='%23c4707a' opacity='0.7'/%3E%3C/svg%3E") 10 10, auto;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   GRAIN OVERLAY
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9998;
+  mix-blend-mode: multiply;
+}
+
+/* ============================================================
+   CLICK OVERLAY — para iniciar o áudio
+   ============================================================ */
+#audio-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(122, 31, 46, 0.88);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  cursor: pointer;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#audio-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.overlay-note {
+  font-family: var(--font-hand);
+  font-size: clamp(48px, 10vw, 80px);
+  color: #fdf7ef;
+  line-height: 1.1;
+  text-align: center;
+  padding: 0 24px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  animation: floatNote 3s ease-in-out infinite;
+}
+.overlay-sub {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(253, 247, 239, 0.75);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.overlay-btn {
+  margin-top: 8px;
+  padding: 14px 42px;
+  border: 2px solid rgba(253,247,239,0.6);
+  border-radius: 100px;
+  color: #fdf7ef;
+  font-family: var(--font-body);
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  background: rgba(255,255,255,0.12);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+.overlay-btn:hover { background: rgba(255,255,255,0.22); transform: scale(1.04); }
+.overlay-hearts { font-size: 28px; letter-spacing: 8px; animation: floatNote 2s ease-in-out infinite alternate; }
+
+@keyframes floatNote {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(253,247,239,0.25); }
+  50% { box-shadow: 0 0 0 12px rgba(253,247,239,0); }
+}
+
+/* ============================================================
+   PÉTALAS
+   ============================================================ */
+.petal {
+  position: fixed;
+  top: -40px;
+  font-size: 20px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 9997;
+  animation: petalFall linear forwards;
+  will-change: transform;
+}
+@keyframes petalFall {
+  0%   { transform: translateY(-40px) rotate(0deg) translateX(0);   opacity: 0.8; }
+  30%  { transform: translateY(30vh)  rotate(120deg) translateX(25px); opacity: 0.7; }
+  60%  { transform: translateY(65vh)  rotate(240deg) translateX(-20px); opacity: 0.5; }
+  100% { transform: translateY(108vh) rotate(360deg) translateX(15px); opacity: 0; }
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.page-wrapper {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  text-align: center;
+  padding: 72px 20px 16px;
+  position: relative;
+}
+
+.hero-ribbon {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-style: italic;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: linear-gradient(135deg, rgba(200,146,58,0.12), rgba(200,146,58,0.06));
+  border: 1px solid rgba(200,146,58,0.35);
+  border-radius: 100px;
+  padding: 6px 22px;
+  margin-bottom: 28px;
+  animation: fadeSlideDown 1s ease 0.2s both;
+}
+
+.hero-title {
+  font-family: var(--font-hand);
+  font-size: clamp(64px, 14vw, 120px);
+  color: var(--wine);
+  line-height: 1.0;
+  margin-bottom: 4px;
+  animation: fadeSlideDown 1s ease 0.4s both;
+  text-shadow: 2px 4px 12px rgba(122,31,46,0.12);
+  position: relative;
+  display: inline-block;
+}
+
+.hero-title::after {
+  content: '🌸';
+  position: absolute;
+  font-size: 0.4em;
+  top: 8px;
+  right: -0.5em;
+  animation: spinFloat 4s ease-in-out infinite;
+}
+
+@keyframes spinFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(15deg); }
+}
+
+.hero-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 4vw, 30px);
+  font-style: italic;
+  color: var(--ink-mid);
+  margin-bottom: 4px;
+  animation: fadeSlideDown 1s ease 0.6s both;
+}
+
+.hero-for {
+  font-family: var(--font-hand);
+  font-size: clamp(32px, 6vw, 52px);
+  color: var(--rose);
+  animation: fadeSlideDown 1s ease 0.8s both;
+  margin-bottom: 32px;
+}
+
+.hero-squiggle {
+  margin: 0 auto;
+  width: 120px;
+  opacity: 0.45;
+  animation: fadeSlideDown 1s ease 1s both;
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   SPOTIFY — Player estilizado
+   ============================================================ */
+.spotify-section {
+  margin: 44px auto 0;
+  max-width: 460px;
+  animation: fadeSlideDown 1s ease 1.2s both;
+  position: relative;
+}
+
+.spotify-label {
+  font-family: var(--font-hand);
+  font-size: 28px;
+  color: var(--rose);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.spotify-card {
+  background: var(--cream);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 
+    0 4px 20px var(--shadow),
+    0 1px 0 rgba(255,255,255,0.9) inset;
+  border: 1px solid rgba(200,146,58,0.2);
+  position: relative;
+}
+
+/* Tape decorativa no spotify */
+.spotify-card::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 70px;
+  height: 22px;
+  background: var(--tape);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.spotify-card iframe {
+  border-radius: 12px;
+  width: 100%;
+}
+
+/* ============================================================
+   POLAROID SECTION
+   ============================================================ */
+.polaroid-section {
+  margin-top: 64px;
+  padding: 0 8px;
+}
+
+.section-label {
+  font-family: var(--font-hand);
+  font-size: clamp(38px, 7vw, 60px);
+  color: var(--wine);
+  text-align: center;
+  margin-bottom: 8px;
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(30px);
+}
+.section-label.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-sub {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-soft);
+  text-align: center;
+  letter-spacing: 0.1em;
+  margin-bottom: 40px;
+  opacity: 0;
+  transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+  transform: translateY(20px);
+}
+.section-sub.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.polaroid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+/* POLAROID */
+.polaroid {
+  background: #fff;
+  padding: 12px 12px 44px;
+  box-shadow:
+    0 6px 20px rgba(80,30,10,0.18),
+    0 1px 0 rgba(255,255,255,0.9) inset;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+  border-radius: 2px;
+  opacity: 0;
+  transform: translateY(40px) rotate(var(--rot, 0deg));
+}
+.polaroid.visible {
+  opacity: 1;
+  transform: translateY(0) rotate(var(--rot, 0deg));
+}
+.polaroid:hover {
+  transform: translateY(-10px) rotate(0deg) scale(1.05) !important;
+  box-shadow:
+    0 18px 40px rgba(80,30,10,0.28),
+    0 1px 0 rgba(255,255,255,0.9) inset;
+  z-index: 10;
+}
+.polaroid:nth-child(1)  { --rot: -3.5deg; transition-delay: 0.05s; }
+.polaroid:nth-child(2)  { --rot:  2.2deg; transition-delay: 0.1s;  }
+.polaroid:nth-child(3)  { --rot: -1.8deg; transition-delay: 0.15s; }
+.polaroid:nth-child(4)  { --rot:  3.1deg; transition-delay: 0.2s;  }
+.polaroid:nth-child(5)  { --rot: -2.5deg; transition-delay: 0.25s; }
+
+/* Tape no polaroid */
+.polaroid::before {
+  content: '';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%) rotate(calc(var(--rot, 0deg) * -1.5));
+  width: 52px;
+  height: 20px;
+  background: var(--tape);
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  z-index: 2;
+}
+
+.polaroid-img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--bg-warm);
+}
+.polaroid-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+.polaroid:hover .polaroid-img-wrap img {
+  transform: scale(1.07);
+}
+
+.polaroid-caption {
+  font-family: var(--font-hand);
+  font-size: 18px;
+  color: var(--ink-mid);
+  text-align: center;
+  margin-top: 10px;
+  line-height: 1.2;
+  padding: 0 4px;
+}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 32, 16, 0.92);
+  backdrop-filter: blur(16px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  cursor: pointer;
+}
+#lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+.lightbox-inner {
+  background: #fff;
+  padding: 16px 16px 56px;
+  max-width: min(520px, 90vw);
+  width: 100%;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  transform: scale(0.85) rotate(-2deg);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: default;
+  position: relative;
+}
+#lightbox.open .lightbox-inner {
+  transform: scale(1) rotate(0deg);
+}
+.lightbox-inner img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+.lightbox-caption {
+  font-family: var(--font-hand);
+  font-size: 24px;
+  color: var(--ink-mid);
+  text-align: center;
+  margin-top: 12px;
+}
+.lightbox-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 36px;
+  height: 36px;
+  background: var(--wine);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: background 0.2s, transform 0.2s;
+}
+.lightbox-close:hover { background: var(--rose); transform: scale(1.1) rotate(90deg); }
+
+/* ============================================================
+   MENSAGEM PRINCIPAL
+   ============================================================ */
+.message-section {
+  margin-top: 72px;
+  padding: 52px 40px;
+  background: var(--cream);
+  border-radius: 4px;
+  position: relative;
+  box-shadow:
+    0 6px 24px var(--shadow),
+    0 1px 0 rgba(255,255,255,0.9) inset;
+  border-left: 4px solid var(--rose-light);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.message-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* linhas do caderno */
+.message-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    rgba(196, 112, 122, 0.12) 31px,
+    rgba(196, 112, 122, 0.12) 32px
+  );
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.message-open-quote {
+  font-family: var(--font-hand);
+  font-size: 100px;
+  color: var(--rose-light);
+  line-height: 0.5;
+  display: block;
+  margin-bottom: 28px;
+  opacity: 0.6;
+}
+
+.message-text {
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-style: italic;
+  line-height: 2.0;
+  color: var(--ink-mid);
+  position: relative;
+  z-index: 1;
+}
+
+.message-signature {
+  font-family: var(--font-hand);
+  font-size: 36px;
+  color: var(--rose);
+  text-align: right;
+  margin-top: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* corner fold */
+.message-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(225deg, var(--bg) 50%, var(--rose-light) 50%);
+  border-radius: 0 0 4px 0;
+}
+
+/* ============================================================
+   CONTADOR
+   ============================================================ */
+.counter-section {
+  margin-top: 64px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.counter-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.counter-label-hand {
+  font-family: var(--font-hand);
+  font-size: clamp(36px, 6vw, 54px);
+  color: var(--wine);
+  text-align: center;
+  margin-bottom: 20px;
+}
+.counter-card {
+  background: var(--cream);
+  border-radius: 4px;
+  padding: 36px 32px;
+  box-shadow:
+    0 6px 24px var(--shadow),
+    0 1px 0 rgba(255,255,255,0.9) inset;
+  text-align: center;
+  position: relative;
+  border-top: 3px solid var(--gold);
+}
+/* pin */
+.counter-card::before {
+  content: '📌';
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+.counter-eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+#contador {
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 3vw, 21px);
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--wine);
+  font-weight: 700;
+}
+
+/* ============================================================
+   LINHA DO TEMPO — sticky notes
+   ============================================================ */
+.timeline-section {
+  margin-top: 72px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.timeline-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.sticky-note {
+  padding: 28px 24px 32px;
+  border-radius: 2px;
+  position: relative;
+  box-shadow:
+    0 6px 20px rgba(80,30,10,0.16),
+    0 1px 0 rgba(255,255,255,0.5) inset;
+  transform: rotate(var(--note-rot, 0deg));
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s;
+  cursor: default;
+}
+.sticky-note:hover {
+  transform: rotate(0deg) scale(1.03) translateY(-4px);
+  box-shadow: 0 14px 36px rgba(80,30,10,0.22);
+  z-index: 5;
+}
+.sticky-note:nth-child(1) { --note-rot: -1.8deg; background: #fff8d6; }
+.sticky-note:nth-child(2) { --note-rot:  1.5deg; background: #fce8e8; }
+.sticky-note:nth-child(3) { --note-rot: -1.2deg; background: #e8f5e8; }
+.sticky-note:nth-child(4) { --note-rot:  2.0deg; background: #e8eeff; }
+
+/* tape no sticky note */
+.sticky-note::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 18px;
+  background: rgba(220, 200, 160, 0.65);
+  border-radius: 2px;
+}
+
+.note-date {
+  font-family: var(--font-hand);
+  font-size: 20px;
+  color: var(--rose);
+  margin-bottom: 6px;
+}
+.note-title {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.note-desc {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--ink-mid);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  margin-top: 80px;
+  text-align: center;
+  padding: 36px 24px;
+  background: var(--cream);
+  border-radius: 4px;
+  box-shadow: 0 4px 20px var(--shadow);
+  position: relative;
+}
+.site-footer::before {
+  content: '✂ — — — — — — — — — — — — — — — — —';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.08em;
+  opacity: 0.45;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.footer-logo {
+  height: 32px;
+  margin: 0 auto 14px;
+  opacity: 0.85;
+}
+.footer-text {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.footer-text strong { color: var(--wine); }
+.footer-cta {
+  display: inline-block;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--wine), #a03040);
+  color: #fff9f0;
+  border-radius: 100px;
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  transition: transform 0.25s, box-shadow 0.25s;
+  box-shadow: 0 4px 16px rgba(122,31,46,0.3);
+}
+.footer-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(122,31,46,0.35);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  .page-wrapper { padding: 0 14px 60px; }
+  .hero { padding: 56px 14px 16px; }
+  .message-section { padding: 40px 22px; }
+  .timeline-grid { grid-template-columns: 1fr; }
+  .polaroid-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+}
+
+/* ============================================================
+   HEARTS FLOATING (scroll reward)
+   ============================================================ */
+.heart-float {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  z-index: 9996;
+  animation: heartRise 2.5s ease-out forwards;
+  font-size: 22px;
+}
+@keyframes heartRise {
+  0%   { opacity: 1;   transform: translateY(0) scale(1); }
+  100% { opacity: 0;   transform: translateY(-180px) scale(0.5); }
+}
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     AUDIO OVERLAY
+     ============================================================ -->
+<div id="audio-overlay">
+  <div class="overlay-hearts">🌸 💛 🌸</div>
+  <div class="overlay-note">Uma mensagem<br>especial para você</div>
+  <div class="overlay-sub">Toque para abrir</div>
+  <button class="overlay-btn" onclick="startExperience()">Abrir com música ♪</button>
+</div>
+
+<!-- ============================================================
+     PÉTALAS
+     ============================================================ -->
+<div id="petals-container" aria-hidden="true"></div>
+
+<!-- ============================================================
+     LIGHTBOX
+     ============================================================ -->
+<div id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox(null, true)">✕</button>
+    <img id="lightbox-img" src="" alt="" />
+    <div class="lightbox-caption" id="lightbox-cap"></div>
+  </div>
+</div>
+
+
+<div class="page-wrapper">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-ribbon">Uma homenagem especial</div>
+    <h1 class="hero-title">Feliz Dia<br>das Mães</h1>
+    <p class="hero-subtitle">com todo o meu amor</p>
+    <p class="hero-for">para você, [Nome da Mãe] 🌸</p>
+    <svg class="hero-squiggle" viewBox="0 0 120 20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 10 Q15 2 30 10 Q45 18 60 10 Q75 2 90 10 Q105 18 118 10"
+            fill="none" stroke="#c4707a" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </header>
+
+  <!-- SPOTIFY -->
+  <section class="spotify-section" aria-label="Música especial">
+    <div class="spotify-label">♫ nossa música</div>
+    <div class="spotify-card">
+      <!--
+        ══════════════════════════════════════════════
+        PERSONALIZE: Troque o src pelo link da música.
+        Adicione &autoplay=1 ao final da URL para autoplay.
+        ══════════════════════════════════════════════
+      -->
+      <iframe
+        id="spotify-iframe"
+        style="border-radius:12px"
+        src="https://open.spotify.com/embed/track/4XcWXKMKp53c8OU3HHlxgL?utm_source=generator&theme=0&autoplay=1"
+        width="100%"
+        height="152"
+        frameborder="0"
+        allowfullscreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        title="Música especial"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- POLAROID PHOTOS -->
+  <section class="polaroid-section" aria-label="Fotos especiais">
+    <div class="section-label">momentos</div>
+    <div class="section-sub">clique nas fotos para ampliar</div>
+
+    <div class="polaroid-grid" id="polaroidGrid">
+      <!--
+        ══════════════════════════════════════════════
+        PERSONALIZE: Troque as src das imagens e
+        o texto das legendas abaixo.
+        ══════════════════════════════════════════════
+      -->
+      <div class="polaroid" onclick="openLightbox(this)" data-src="https://previewstellae.com/wp-content/uploads/2025/06/14.jpg" data-cap="para sempre no meu coração">
+        <div class="polaroid-img-wrap">
+          <img src="https://previewstellae.com/wp-content/uploads/2025/06/14.jpg" alt="Foto especial 1" loading="lazy" />
+        </div>
+        <div class="polaroid-caption">para sempre 💛</div>
+      </div>
+
+      <div class="polaroid" onclick="openLightbox(this)" data-src="https://previewstellae.com/wp-content/uploads/2025/06/15.jpg" data-cap="momentos que nunca esqueço">
+        <div class="polaroid-img-wrap">
+          <img src="https://previewstellae.com/wp-content/uploads/2025/06/15.jpg" alt="Foto especial 2" loading="lazy" />
+        </div>
+        <div class="polaroid-caption">memória 🌸</div>
+      </div>
+
+      <div class="polaroid" onclick="openLightbox(this)" data-src="https://previewstellae.com/wp-content/uploads/2025/06/16.jpg" data-cap="juntas sempre">
+        <div class="polaroid-img-wrap">
+          <img src="https://previewstellae.com/wp-content/uploads/2025/06/16.jpg" alt="Foto especial 3" loading="lazy" />
+        </div>
+        <div class="polaroid-caption">juntas 🤍</div>
+      </div>
+
+      <div class="polaroid" onclick="openLightbox(this)" data-src="https://previewstellae.com/wp-content/uploads/2025/06/17.jpg" data-cap="amor que não tem fim">
+        <div class="polaroid-img-wrap">
+          <img src="https://previewstellae.com/wp-content/uploads/2025/06/17.jpg" alt="Foto especial 4" loading="lazy" />
+        </div>
+        <div class="polaroid-caption">amor infinito ✨</div>
+      </div>
+
+      <div class="polaroid" onclick="openLightbox(this)" data-src="https://previewstellae.com/wp-content/uploads/2025/06/18.jpg" data-cap="meu lar, meu tudo">
+        <div class="polaroid-img-wrap">
+          <img src="https://previewstellae.com/wp-content/uploads/2025/06/18.jpg" alt="Foto especial 5" loading="lazy" />
+        </div>
+        <div class="polaroid-caption">meu lar 🏠</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENSAGEM -->
+  <section class="message-section" aria-label="Mensagem especial">
+    <span class="message-open-quote" aria-hidden="true">"</span>
+    <p class="message-text">
+      <!--
+        ══════════════════════════════════════════════
+        PERSONALIZE: Mensagem principal do cliente.
+        ══════════════════════════════════════════════
+      -->
+      Mãe, quero que você saiba o quanto você é especial para mim.
+      Obrigada por cada abraço, por cada conselho, por cada sacrifício
+      que você fez sem que eu percebesse. Você é a minha força e o
+      meu exemplo. Que esse dia seja tão bonito quanto tudo o que você
+      representa para mim. Te amo demais!
+    </p>
+    <div class="message-signature">com amor 💛</div>
+  </section>
+
+  <!-- CONTADOR -->
+  <section class="counter-section" aria-label="Contador de tempo">
+    <div class="counter-label-hand">contando cada segundo...</div>
+    <div class="counter-card">
+      <p class="counter-eyebrow">Sendo minha mãe há</p>
+      <div id="contador">Calculando...</div>
+    </div>
+  </section>
+
+  <!-- LINHA DO TEMPO -->
+  <section class="timeline-section" aria-label="Nossa história">
+    <div class="section-label" style="color:var(--ink)">nossa história</div>
+    <div class="section-sub">lembrancas que guardarei para sempre</div>
+
+    <div class="timeline-grid">
+      <!-- NOTA 1 -->
+      <div class="sticky-note">
+        <div class="note-date">Desde sempre</div>
+        <div class="note-title">O colo mais seguro do mundo</div>
+        <div class="note-desc">
+          Desde que eu era pequena, o seu colo sempre foi o lugar onde me sentia mais segura.
+          Não importava o tamanho do problema — um abraço seu resolvia tudo. 💛
+        </div>
+      </div>
+
+      <!-- NOTA 2 -->
+      <div class="sticky-note">
+        <div class="note-date">Nas manhãs de domingo</div>
+        <div class="note-title">O cheiro do seu almoço</div>
+        <div class="note-desc">
+          Acordar com o cheiro da comida que você fazia era o melhor começo de dia.
+          Esse cheiro ainda é sinônimo de lar para mim. 🍲
+        </div>
+      </div>
+
+      <!-- NOTA 3 -->
+      <div class="sticky-note">
+        <div class="note-date">Nos momentos difíceis</div>
+        <div class="note-title">Você nunca me deixou desistir</div>
+        <div class="note-desc">
+          Quando eu achei que não conseguiria, você estava lá me lembrando de quem eu sou.
+          Obrigada por acreditar em mim mais do que eu mesma. 💪
+        </div>
+      </div>
+
+      <!-- NOTA 4 -->
+      <div class="sticky-note">
+        <div class="note-date">Hoje e sempre</div>
+        <div class="note-title">Minha maior referência</div>
+        <div class="note-desc">
+          Com o tempo fui entendendo tudo o que você fez por mim. Você é minha inspiração
+          e meu exemplo de amor, garra e generosidade. Te amo, mãe! 🌸
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <img
+      class="footer-logo"
+      src="https://previewstellae.com/wp-content/uploads/2025/03/cropped-20-INTEGRACOES-4.png"
+      alt="Stellae Nexus"
+    />
+    <p class="footer-text">
+      Criado com 💛 por <strong>Stellae Nexus</strong><br />
+      © 2025 — Todos os direitos reservados
+    </p>
+    <a
+      class="footer-cta"
+      href="https://wa.me/5561981704761"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Quer um site assim também? Fale com a gente 💛
+    </a>
+  </footer>
+
+</div><!-- /page-wrapper -->
+
+
+<script>
+/* ──────────────────────────────────────────
+   AUDIO OVERLAY / START EXPERIENCE
+────────────────────────────────────────── */
+function startExperience() {
+  const overlay = document.getElementById('audio-overlay');
+  overlay.classList.add('hidden');
+
+  // Recarrega iframe com autoplay ativo após interação do usuário
+  const iframe = document.getElementById('spotify-iframe');
+  const currentSrc = iframe.src;
+  // garante &autoplay=1
+  if (!currentSrc.includes('autoplay=1')) {
+    iframe.src = currentSrc + '&autoplay=1';
+  } else {
+    // re-seta para forçar play
+    iframe.src = '';
+    setTimeout(() => { iframe.src = currentSrc; }, 100);
+  }
+
+  // Inicia chuva de pétalas
+  startPetals();
+
+  // Floating hearts na entrada
+  for (let i = 0; i < 12; i++) {
+    setTimeout(() => spawnHeart(), i * 120);
+  }
+}
+
+/* ──────────────────────────────────────────
+   PÉTALAS CAINDO
+────────────────────────────────────────── */
+const symbols = ['🌸', '🌷', '💛', '✿', '❀', '🌺'];
+let petalsInterval;
+
+function startPetals() {
+  petalsInterval = setInterval(() => {
+    const el = document.createElement('div');
+    el.classList.add('petal');
+    el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    el.style.left = (Math.random() * 100) + 'vw';
+    el.style.fontSize = (Math.random() * 14 + 12) + 'px';
+    el.style.animationDuration = (Math.random() * 5 + 7) + 's';
+    el.style.opacity = (Math.random() * 0.4 + 0.4).toString();
+    document.getElementById('petals-container').appendChild(el);
+    setTimeout(() => el.remove(), 13000);
+  }, 480);
+}
+
+/* ──────────────────────────────────────────
+   HEARTS FLUTUANTES
+────────────────────────────────────────── */
+function spawnHeart(x, y) {
+  const el = document.createElement('div');
+  el.classList.add('heart-float');
+  el.textContent = ['💛','🌸','💕','✨','🌷'][Math.floor(Math.random()*5)];
+  el.style.left = (x !== undefined ? x : Math.random() * 100 + 'vw');
+  el.style.top  = (y !== undefined ? y + 'px' : Math.random() * 80 + 10 + 'vh');
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2600);
+}
+
+// Coração ao clicar em qualquer lugar
+document.addEventListener('click', (e) => {
+  if (e.target.closest('#audio-overlay') || e.target.closest('#lightbox')) return;
+  spawnHeart(e.clientX - 12, e.clientY - 40);
+});
+
+/* ──────────────────────────────────────────
+   LIGHTBOX (POLAROID EXPANDIDA)
+────────────────────────────────────────── */
+function openLightbox(card) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = card.dataset.src;
+  document.getElementById('lightbox-cap').textContent = card.dataset.cap;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e, force) {
+  if (force || (e && e.target === document.getElementById('lightbox'))) {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox(null, true);
+});
+
+/* ──────────────────────────────────────────
+   SCROLL REVEAL — Intersection Observer
+────────────────────────────────────────── */
+const revealEls = document.querySelectorAll(
+  '.section-label, .section-sub, .polaroid, .message-section, .counter-section, .timeline-section'
+);
+
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => revealObs.observe(el));
+
+/* ──────────────────────────────────────────
+   CONTADOR DE TEMPO
+   ══════════════════════════════════════════
+   PERSONALIZE: Altere a data abaixo para a
+   data de nascimento da mãe ou data especial.
+────────────────────────────────────────── */
+(function () {
+  const DATA_INICIAL = new Date("1975-03-22T00:00:00");
+  const LABEL_PREFIXO = "Sendo minha mãe há ";
+
+  function atualizar() {
+    const agora = new Date();
+    const diff  = agora - DATA_INICIAL;
+    const seg   = Math.floor(diff / 1000);
+    const anos  = Math.floor(seg / (365.25 * 24 * 3600));
+    const meses = Math.floor((seg % (365.25 * 24 * 3600)) / (30.44 * 24 * 3600));
+    const dias  = Math.floor((seg % (30.44 * 24 * 3600)) / (24 * 3600));
+    const h     = Math.floor((seg % (24 * 3600)) / 3600);
+    const m     = Math.floor((seg % 3600) / 60);
+    const s     = seg % 60;
+
+    let txt = LABEL_PREFIXO;
+    if (anos  > 0) txt += `${anos} ano${anos  !== 1 ? 's' : ''}, `;
+    if (meses > 0) txt += `${meses} mês${meses !== 1 ? 'es' : ''}, `;
+    txt += `${dias} dia${dias !== 1 ? 's' : ''}, ${h}h, ${m}min e ${s}s 🌸`;
+    document.getElementById('contador').textContent = txt;
+  }
+
+  atualizar();
+  setInterval(atualizar, 1000);
+})();
+
+/* ──────────────────────────────────────────
+   POLAROID — animação de entrada em cascata
+────────────────────────────────────────── */
+(function () {
+  const polaroids = document.querySelectorAll('.polaroid');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  polaroids.forEach(p => obs.observe(p));
+})();
+</script>
+
+</body>
+</html>
